@@ -1,4 +1,4 @@
-#include "LogPolicy.hpp"
+#include "log_utils.hpp"
 
 #include <fstream>
 #include <stdexcept>

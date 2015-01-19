@@ -1,3 +1,6 @@
+#define LOGGING_LEVEL_1
+#include <iostream>
+
 #include "logger.hpp"
 
 int main()
