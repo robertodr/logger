@@ -1,14 +1,21 @@
+#ifndef LOGPOLICY_HPP
+#define LOGPOLICY_HPP
+
+#include <fstream>
+#include <memory>
+#include <string>
+
 class log_policy_interface
 {
 public:
-    virtual void		open_ostream(const std::string& name) = 0;
-    virtual void		close_ostream() = 0;
-    virtual void		write(const std::string& msg) = 0;
+    virtual void open_ostream(const std::string& name) = 0;
+    virtual void close_ostream() = 0;
+    virtual void write(const std::string& msg) = 0;
 
 };
 
 /*
- * Implementation which allow to write into a file
+ * Implementation which allows to write into a file
  */
 
 class file_log_policy : public log_policy_interface
@@ -21,3 +28,5 @@ public:
     void write(const std::string& msg);
     ~file_log_policy();
 };
+
+#endif // LOGPOLICY_HPP

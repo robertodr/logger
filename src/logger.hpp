@@ -1,3 +1,14 @@
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
+
+#include <mutex>
+
+enum severity_type {
+    debug = 1,
+    error,
+    warning
+};
+
 template< typename log_policy >
 class logger
 {
@@ -15,8 +26,10 @@ class logger
 public:
     logger( const std::string& name );
 
-    template< severity_type severity , typename...Args >
+    template< severity_type severity, typename...Args >
     void print( Args...args );
 
     ~logger();
 };
+
+#endif // LOGGER_HPP

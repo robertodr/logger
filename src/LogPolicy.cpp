@@ -1,3 +1,8 @@
+#include "LogPolicy.hpp"
+
+#include <fstream>
+#include <stdexcept>
+
 void file_log_policy::open_ostream(const std::string& name)
 {
     out_stream->open( name.c_str(), std::ios_base::binary|std::ios_base::out );

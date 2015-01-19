@@ -1,3 +1,9 @@
+#include "logger.hpp"
+
+#include <ctime>
+#include <sstream>
+#include <string>
+
 template< typename log_policy >
 void logger< log_policy >::print_impl()
 {
