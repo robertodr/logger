@@ -1,6 +1,8 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
+#ifdef HAS_CXX11_SUPPORT
+
 #include "log.hpp"
 
 static logging::logger< logging::file_log_policy > log_inst( "execution.log" );
@@ -25,4 +27,20 @@ static logging::logger< logging::file_log_policy > log_inst( "execution.log" );
 #define ELOG_WARN(...)
 #endif
 
+#else // HAS_CXX11_SUPPORT
+
+#ifdef LOGGING_LEVEL_1
+#define LOG(...)
+#define LOG_ERR(...)
+#define LOG_WARN(...)
 #endif
+
+#ifdef LOGGING_LEVEL_2
+#define ELOG(...)
+#define ELOG_ERR(...)
+#define ELOG_WARN(...)
+#endif
+
+#endif // HAS_CXX11_SUPPORT
+ 
+#endif // LOGGER_HPP
