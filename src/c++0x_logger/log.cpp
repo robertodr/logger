@@ -6,59 +6,59 @@
 
 namespace logging 
 {
-   template <typename log_policy>
-   logger<log_policy>::logger(const std::string & name) 
-       : logLineNumber_(0), policy(new log_policy) 
+   template <typename logPolicy>
+   logger<logPolicy>::logger(const std::string & name) 
+       : logLineNumber_(0), policy_(new logPolicy) 
    {
-       if( !policy ) {
+       if(!policy_) {
            throw std::runtime_error("LOGGER: Unable to create the logger instance");
        }
-       policy->open_ostream(name);
+       policy_->open_ostream(name);
    }
 
-   template <typename log_policy>
-   logger<log_policy>::~logger()
+   template <typename logPolicy>
+   logger<logPolicy>::~logger()
    {
-            if( policy ) {
-                policy->close_ostream();
-                delete policy;
+            if(policy_) {
+                policy_->close_ostream();
+                delete policy_;
             }
    }
 
-   template <typename log_policy>
-   std::string logger<log_policy>::get_time()
+   template <typename logPolicy>
+   std::string logger<logPolicy>::get_time()
    {
           std::string time_str;                               
           time_t raw_time;                                    
                                                              
-          time( & raw_time );                                 
-          time_str = ctime( &raw_time );                      
+          time(&raw_time);                                 
+          time_str = ctime(&raw_time);                      
                                                              
           //without the newline character                     
-          return time_str.substr( 0 , time_str.size() - 1 );  
+          return time_str.substr(0, time_str.size() - 1);  
       }                                                       
    
-   template <typename log_policy>
-   std::string logger<log_policy>::get_logline_header() 
+   template <typename logPolicy>
+   std::string logger<logPolicy>::get_logline_header() 
    {
             std::stringstream header;
 
             header.str("");
             header.fill('0');
             header.width(7);
-            header << logLineNumber_++ <<" < "<<get_time()<<" - ";
+            header << logLineNumber_++ << " < " <<get_time() << " - ";
 
             header.fill('0');
             header.width(7);
-            header <<clock()<<" > ~ ";
+            header << clock() << " > ~ ";
 
             return header.str();
         }
 
-   template <typename log_policy>
-   void logger<log_policy>::print_impl()
+   template <typename logPolicy>
+   void logger<logPolicy>::print_impl()
    {
-            policy->write( get_logline_header() + logStream_.str() );
+            policy_->write(get_logline_header() + logStream_.str());
             logStream_.str("");
    }
    

@@ -8,13 +8,13 @@
 
 namespace logging
 {
-    template<typename log_policy>
+    template<typename logPolicy>
     class logger
     {
       private:
         size_t logLineNumber_;
         std::stringstream logStream_;
-        log_policy * policy;
+        logPolicy * policy_;
         std::mutex writeMutex_;
 
         std::string get_time(); 
