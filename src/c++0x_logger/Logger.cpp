@@ -1,8 +1,9 @@
-#include "log.hpp"
+#include "Logger.hpp"
 
+#include <ctime>
 #include <stdexcept>
 
-#include "log_utils.hpp"
+#include "LoggerImpl.hpp"
 
 namespace logging 
 {
@@ -29,10 +30,10 @@ namespace logging
    std::string logger<logPolicy>::getTime()
    {
           std::string time_str;                               
-          time_t raw_time;                                    
+	  time_t raw_time;                                    
                                                              
-          time(&raw_time);                                 
-          time_str = ctime(&raw_time);                      
+	  std::time(&raw_time);                                 
+          time_str = std::ctime(&raw_time);                      
                                                              
           //without the newline character                     
           return time_str.substr(0, time_str.size() - 1);  

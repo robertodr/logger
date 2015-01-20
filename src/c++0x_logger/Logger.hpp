@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-#include "log_utils.hpp"
+#include "LoggerImpl.hpp"
 
 namespace logging
 {

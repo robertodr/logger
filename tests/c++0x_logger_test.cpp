@@ -3,7 +3,7 @@
 
 #include <Eigen/Dense>
 
-#include "logger.hpp"
+#include "LoggerInterface.hpp"
 
 int main()
 {

@@ -1,4 +1,4 @@
-#include "log_utils.hpp"
+#include "LoggerImpl.hpp"
 
 #include <fstream>
 #include <stdexcept>

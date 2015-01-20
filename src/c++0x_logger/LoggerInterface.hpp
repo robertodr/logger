@@ -3,7 +3,7 @@
 
 #ifdef HAS_CXX11_SUPPORT
 
-#include "log.hpp"
+#include "Logger.hpp"
 
 static logging::logger< logging::file_log_policy > log_inst( "execution.log" );
 
