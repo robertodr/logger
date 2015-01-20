@@ -58,8 +58,8 @@ namespace logging
    template <typename log_policy>
    void logger<log_policy>::print_impl()
    {
-            policy->write( get_logline_header() + log_stream.str() );
-            log_stream.str("");
+            policy->write( get_logline_header() + logStream_.str() );
+            logStream_.str("");
    }
    
    /*! @name Explicit specializations

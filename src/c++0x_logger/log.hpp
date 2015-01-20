@@ -13,7 +13,7 @@ namespace logging
     {
       private:
         size_t logLineNumber_;
-        std::stringstream log_stream;
+        std::stringstream logStream_;
         log_policy * policy;
         std::mutex write_mutex;
 
@@ -27,7 +27,7 @@ namespace logging
 	 *  with no parameters/types.
 	 *  The variadic template is called recursively.
 	 *  The type for the first parameter is resolved and streamed
-	 *  to log_stream. When all the parameters have been streamed
+	 *  to logStream_. When all the parameters have been streamed
 	 *  the version with no arguments is called.
 	 */
 	/// @{
@@ -35,7 +35,7 @@ namespace logging
         void print_impl();
         template<typename First, typename...Rest>
         void print_impl(First parm1, Rest...parm) {
-            log_stream<<parm1;
+            logStream_<<parm1;
             print_impl(parm...);
         }
 	/// @}
@@ -53,13 +53,13 @@ namespace logging
             write_mutex.lock();
             switch(severity) {
             case severity_type::debug:
-                log_stream << "<DEBUG> : ";
+                logStream_ << "<DEBUG> : ";
                 break;
             case severity_type::warning:
-                log_stream << "<WARNING> : ";
+                logStream_ << "<WARNING> : ";
                 break;
             case severity_type::error:
-                log_stream << "<ERROR> : ";
+                logStream_ << "<ERROR> : ";
                 break;
             };
             print_impl(args...);
