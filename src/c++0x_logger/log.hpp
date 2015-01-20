@@ -8,57 +8,64 @@
 
 namespace logging
 {
-    template< typename log_policy >
+    template<typename log_policy>
     class logger
     {
       private:
-        unsigned log_line_number;
+        size_t log_line_number;
         std::stringstream log_stream;
-        log_policy* policy;
+        log_policy * policy;
         std::mutex write_mutex;
 
         std::string get_time(); 
         std::string get_logline_header();
 
-        //Core printing functionality
+	/*! @name Core printing functionality
+	 *  
+	 *  A variadic template is used, we specify the version
+	 *  with a variable number of parameters/types and the version
+	 *  with no parameters/types.
+	 *  The variadic template is called recursively.
+	 *  The type for the first parameter is resolved and streamed
+	 *  to log_stream. When all the parameters have been streamed
+	 *  the version with no arguments is called.
+	 */
+	/// @{
+	/*! */
         void print_impl();
         template<typename First, typename...Rest>
         void print_impl(First parm1, Rest...parm) {
             log_stream<<parm1;
             print_impl(parm...);
         }
+	/// @}
     public:
-        logger( const std::string& name ) : log_line_number(0), policy(new log_policy) {
-            if( !policy ) {
-                throw std::runtime_error("LOGGER: Unable to create the logger instance");
-            }
-            policy->open_ostream( name );
-        }
+        /*! Constructor
+	 *  \param[in] name name for the log file
+	 */ 
+        logger(const std::string & name);
+	/// Destructor
+        ~logger(); 
 
-        template< severity_type severity, typename...Args >
-        void print( Args...args ) {
+	/// User interface for the logger class
+        template<severity_type severity, typename...Args>
+        void print(Args...args) {
             write_mutex.lock();
-            switch( severity ) {
+            switch(severity) {
             case severity_type::debug:
-                log_stream<<"<DEBUG> :";
+                log_stream << "<DEBUG> : ";
                 break;
             case severity_type::warning:
-                log_stream<<"<WARNING> :";
+                log_stream << "<WARNING> : ";
                 break;
             case severity_type::error:
-                log_stream<<"<ERROR> :";
+                log_stream << "<ERROR> : ";
                 break;
             };
-            print_impl( args... );
+            print_impl(args...);
             write_mutex.unlock();
         }
 
-        ~logger() {
-            if( policy ) {
-                policy->close_ostream();
-                delete policy;
-            }
-        }
     };
 } // close namespace logging
 
