@@ -15,7 +15,7 @@ namespace logging
         size_t logLineNumber_;
         std::stringstream logStream_;
         log_policy * policy;
-        std::mutex write_mutex;
+        std::mutex writeMutex_;
 
         std::string get_time(); 
         std::string get_logline_header();
@@ -50,7 +50,7 @@ namespace logging
 	/// User interface for the logger class
         template<severity_type severity, typename...Args>
         void print(Args...args) {
-            write_mutex.lock();
+            writeMutex_.lock();
             switch(severity) {
             case severity_type::debug:
                 logStream_ << "<DEBUG> : ";
@@ -63,7 +63,7 @@ namespace logging
                 break;
             };
             print_impl(args...);
-            write_mutex.unlock();
+            writeMutex_.unlock();
         }
 
     };
