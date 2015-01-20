@@ -5,29 +5,29 @@
 
 namespace logging
 {
-    void file_log_policy::open_ostream(const std::string& name)
+    void FileLogPolicy::open_ostream(const std::string & name)
     {
-        out_stream->open( name.c_str(), std::ios_base::binary|std::ios_base::out );
-        if( !out_stream->is_open() ) {
+        outStream_->open(name.c_str(), std::ios_base::binary | std::ios_base::out);
+        if(!outStream_->is_open()) {
             throw(std::runtime_error("LOGGER: Unable to open an output stream"));
         }
     }
 
-    void file_log_policy::close_ostream()
+    void FileLogPolicy::close_ostream()
     {
-        if( out_stream ) {
-            out_stream->close();
+        if(outStream_) {
+            outStream_->close();
         }
     }
 
-    void file_log_policy::write(const std::string& msg)
+    void FileLogPolicy::write(const std::string & msg)
     {
-        (*out_stream)<<msg<<std::endl;
+        (*outStream_) << msg << std::endl;
     }
 
-    file_log_policy::~file_log_policy()
+    FileLogPolicy::~FileLogPolicy()
     {
-        if( out_stream ) {
+        if(outStream_) {
             close_ostream();
         }
     }

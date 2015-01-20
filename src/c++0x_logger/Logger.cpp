@@ -66,8 +66,7 @@ namespace logging
    /*! @name Explicit specializations
     */ 
    /// @{
-   /*! Specialization for file_log_policy */
-   template class logger<file_log_policy>;
+   /*! Specialization for FileLogPolicy */
+   template class logger<FileLogPolicy>;
    /// @}
-
 } // close namespace logging

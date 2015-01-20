@@ -7,35 +7,56 @@
 
 namespace logging
 {
-    enum severity_type {
+    enum severityType {
         debug = 1,
         error,
         warning
     };
 
-    class log_policy_interface
+    /*! \class ILogPolicy
+     *  \brief ABC for logging policy classes
+     */
+    class ILogPolicy
     {
     public:
-        virtual void open_ostream(const std::string& name) = 0;
+	/*! \brief Opens an output stream with the given name
+	 *  \param[in] name name of the stream
+	 */
+        virtual void open_ostream(const std::string & name) = 0;
+	/*! \brief Closes an output stream with the given name
+	 *  \param[in] name name of the stream
+	 */
         virtual void close_ostream() = 0;
-        virtual void write(const std::string& msg) = 0;
-
+	/*! \brief Writes to stream
+	 *  \param[in] msg message to be written to stream
+	 */
+        virtual void write(const std::string & msg) = 0;
     };
 
-    /*
-     * Implementation which allows to write into a file
+    /*! \class FileLogPolicy
+     *  \brief Implementation which allows to write into a file
      */
-
-    class file_log_policy : public log_policy_interface
+    class FileLogPolicy : public ILogPolicy
     {
     private:
-        std::unique_ptr< std::ofstream > out_stream;
+        std::unique_ptr<std::ofstream> outStream_;
     public:
-        file_log_policy() : out_stream( new std::ofstream ) {}
-        void open_ostream(const std::string& name);
-        void close_ostream();
-        void write(const std::string& msg);
-        ~file_log_policy();
+	/// Constructor
+        FileLogPolicy() : outStream_(new std::ofstream) {}
+	/// Destructor
+        ~FileLogPolicy();
+	/*! \brief Opens an output stream with the given name
+	 *  \param[in] name name of the stream
+	 */
+        virtual void open_ostream(const std::string & name);
+	/*! \brief Closes an output stream with the given name
+	 *  \param[in] name name of the stream
+	 */
+        virtual void close_ostream();
+	/*! \brief Writes to stream
+	 *  \param[in] msg message to be written to stream
+	 */
+        virtual void write(const std::string & msg);
     };
 
 } // close namespace logging

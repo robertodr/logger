@@ -5,12 +5,12 @@
 
 #include "Logger.hpp"
 
-static logging::logger< logging::file_log_policy > log_inst( "execution.log" );
+static logging::logger<logging::FileLogPolicy> loggerInstance("execution.log");
 
 #ifdef LOGGING_LEVEL_1
-#define LOG log_inst.print< logging::severity_type::debug >
-#define LOG_ERR log_inst.print< logging::severity_type::error >
-#define LOG_WARN log_inst.print< logging::severity_type::warning >
+#define LOG loggerInstance.print<logging::severityType::debug>
+#define LOG_ERR loggerInstance.print<logging::severityType::error>
+#define LOG_WARN loggerInstance.print<logging::severityType::warning>
 #else
 #define LOG(...)
 #define LOG_ERR(...)
@@ -18,9 +18,9 @@ static logging::logger< logging::file_log_policy > log_inst( "execution.log" );
 #endif
 
 #ifdef LOGGING_LEVEL_2
-#define ELOG log_inst.print< logging::severity_type::debug >
-#define ELOG_ERR log_inst.print< logging::severity_type::error >
-#define ELOG_WARN log_inst.print< logging::severity_type::warning >
+#define ELOG loggerInstance.print<logging::severityType::debug>
+#define ELOG_ERR loggerInstance.print<logging::severityType::error>
+#define ELOG_WARN loggerInstance.print<logging::severityType::warning>
 #else
 #define ELOG(...)
 #define ELOG_ERR(...)

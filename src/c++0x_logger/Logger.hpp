@@ -49,17 +49,17 @@ namespace logging
         ~logger(); 
 
 	/// User interface for the logger class
-        template<severity_type severity, typename...Args>
+        template<severityType severity, typename...Args>
         void print(Args...args) {
             writeMutex_.lock();
             switch(severity) {
-            case severity_type::debug:
+            case severityType::debug:
                 logStream_ << "<DEBUG> : ";
                 break;
-            case severity_type::warning:
+            case severityType::warning:
                 logStream_ << "<WARNING> : ";
                 break;
-            case severity_type::error:
+            case severityType::error:
                 logStream_ << "<ERROR> : ";
                 break;
             };
