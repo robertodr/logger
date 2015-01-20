@@ -32,11 +32,11 @@ namespace logging
 	 */
 	/// @{
 	/*! */
-        void print_impl();
+        void printImpl();
         template<typename First, typename...Rest>
-        void print_impl(First parm1, Rest...parm) {
+        void printImpl(First parm1, Rest...parm) {
             logStream_<<parm1;
-            print_impl(parm...);
+            printImpl(parm...);
         }
 	/// @}
     public:
@@ -62,7 +62,7 @@ namespace logging
                 logStream_ << "<ERROR> : ";
                 break;
             };
-            print_impl(args...);
+            printImpl(args...);
             writeMutex_.unlock();
         }
 

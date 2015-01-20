@@ -56,7 +56,7 @@ namespace logging
         }
 
    template <typename logPolicy>
-   void logger<logPolicy>::print_impl()
+   void logger<logPolicy>::printImpl()
    {
             policy_->write(get_logline_header() + logStream_.str());
             logStream_.str("");
