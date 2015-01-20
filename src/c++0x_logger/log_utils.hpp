@@ -28,6 +28,7 @@ namespace logging
 
     class file_log_policy : public log_policy_interface
     {
+    private:
         std::unique_ptr< std::ofstream > out_stream;
     public:
         file_log_policy() : out_stream( new std::ofstream ) {}
