@@ -3,6 +3,7 @@
 
 #include <mutex>
 #include <sstream>
+#include <string>
 
 #include "log_utils.hpp"
 
@@ -17,8 +18,8 @@ namespace logging
         logPolicy * policy_;
         std::mutex writeMutex_;
 
-        std::string get_time(); 
-        std::string get_logline_header();
+        std::string getTime(); 
+        std::string getLoglineHeader();
 
 	/*! @name Core printing functionality
 	 *  
@@ -35,7 +36,7 @@ namespace logging
         void printImpl();
         template<typename First, typename...Rest>
         void printImpl(First parm1, Rest...parm) {
-            logStream_<<parm1;
+            logStream_ << parm1;
             printImpl(parm...);
         }
 	/// @}

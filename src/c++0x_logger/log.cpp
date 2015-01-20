@@ -26,7 +26,7 @@ namespace logging
    }
 
    template <typename logPolicy>
-   std::string logger<logPolicy>::get_time()
+   std::string logger<logPolicy>::getTime()
    {
           std::string time_str;                               
           time_t raw_time;                                    
@@ -39,14 +39,14 @@ namespace logging
       }                                                       
    
    template <typename logPolicy>
-   std::string logger<logPolicy>::get_logline_header() 
+   std::string logger<logPolicy>::getLoglineHeader() 
    {
             std::stringstream header;
 
             header.str("");
             header.fill('0');
             header.width(7);
-            header << logLineNumber_++ << " < " <<get_time() << " - ";
+            header << logLineNumber_++ << " < " <<getTime() << " - ";
 
             header.fill('0');
             header.width(7);
@@ -58,7 +58,7 @@ namespace logging
    template <typename logPolicy>
    void logger<logPolicy>::printImpl()
    {
-            policy_->write(get_logline_header() + logStream_.str());
+            policy_->write(getLoglineHeader() + logStream_.str());
             logStream_.str("");
    }
    
