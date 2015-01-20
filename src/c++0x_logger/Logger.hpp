@@ -1,5 +1,5 @@
-#ifndef LOG_HPP
-#define LOG_HPP
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
 
 #include <mutex>
 #include <sstream>
@@ -70,4 +70,4 @@ namespace logging
     };
 } // close namespace logging
 
-#endif // LOG_HPP
+#endif // LOGGER_HPP

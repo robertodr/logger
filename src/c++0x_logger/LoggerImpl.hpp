@@ -1,5 +1,5 @@
-#ifndef LOG_UTILS_HPP
-#define LOG_UTILS_HPP
+#ifndef LOGGERIMPL_HPP
+#define LOGGERIMPL_HPP
 
 #include <fstream>
 #include <memory>
@@ -61,4 +61,4 @@ namespace logging
 
 } // close namespace logging
 
-#endif // LOG_UTILS_HPP
+#endif // LOGGERIMPL_HPP

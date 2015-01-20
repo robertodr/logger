@@ -1,5 +1,5 @@
-#ifndef LOGGER_HPP
-#define LOGGER_HPP
+#ifndef LOGGERINTERFACE_HPP
+#define LOGGERINTERFACE_HPP
 
 #ifdef HAS_CXX11_SUPPORT
 
@@ -43,4 +43,4 @@ static logging::logger<logging::FileLogPolicy> loggerInstance("execution.log");
 
 #endif // HAS_CXX11_SUPPORT
  
-#endif // LOGGER_HPP
+#endif // LOGGERINTERFACE_HPP
