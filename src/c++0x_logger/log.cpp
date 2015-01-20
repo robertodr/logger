@@ -8,7 +8,7 @@ namespace logging
 {
    template <typename log_policy>
    logger<log_policy>::logger(const std::string & name) 
-       : log_line_number(0), policy(new log_policy) 
+       : logLineNumber_(0), policy(new log_policy) 
    {
        if( !policy ) {
            throw std::runtime_error("LOGGER: Unable to create the logger instance");
@@ -46,7 +46,7 @@ namespace logging
             header.str("");
             header.fill('0');
             header.width(7);
-            header << log_line_number++ <<" < "<<get_time()<<" - ";
+            header << logLineNumber_++ <<" < "<<get_time()<<" - ";
 
             header.fill('0');
             header.width(7);

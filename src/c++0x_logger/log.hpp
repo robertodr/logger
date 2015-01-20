@@ -12,7 +12,7 @@ namespace logging
     class logger
     {
       private:
-        size_t log_line_number;
+        size_t logLineNumber_;
         std::stringstream log_stream;
         log_policy * policy;
         std::mutex write_mutex;
