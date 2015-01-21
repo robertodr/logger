@@ -44,7 +44,7 @@ namespace logging
 	/// Constructor
         FileLogPolicy() : outStream_(new std::ofstream) {}
 	/// Destructor
-        ~FileLogPolicy();
+        virtual ~FileLogPolicy();
 	/*! \brief Opens an output stream with the given name
 	 *  \param[in] name name of the stream
 	 */

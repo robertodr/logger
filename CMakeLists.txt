@@ -13,11 +13,15 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 if(ENABLE_CXX11)
    add_definitions(-DHAS_CXX11_SUPPORT)
-endif()	
+   message(STATUS "C++11 support enabled")
+   set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=c++0x")
+else(ENABLE_CXX11)
+   message(STATUS "C++11 support disabled")
+   message(STATUS "  No logging functionality!")
+   set(CMAKE_CXX_FLAGS "-Wall -fPIC -std=gnu++98")
+endif(ENABLE_CXX11)	
 
-message(STATUS "C++11 support enabled")
-set(CMAKE_CXX_FLAGS "-fPIC -std=c++0x")
-include_directories(src/c++0x_logger)
+include_directories(src)
 
 add_subdirectory(src)
 
